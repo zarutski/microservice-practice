@@ -10,12 +10,13 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
+    // describe bean to create new topic at the application startup
     @Bean
     NewTopic createTopic() {
-        return TopicBuilder.name("payment-created-events-topic")
+        return TopicBuilder.name("product-created-events-topic")
                 .partitions(3)
-                .replicas(3) // 3 topic replicas is maximum count can be achieved (one leader, two followers), because cluster is configured with 3 server/brokers via CLI
-                .configs(Map.of("min.insync.replicas", "2")) // additional property: sets minimal count of synchronized server/brokers (at least two servers should be synchronized with each other)
+                .replicas(3) // each partition will be stored on 3 brokers (1 leader + 2 followers); max possible if the cluster has 3 brokers
+                .configs(Map.of("min.insync.replicas", "2")) // additional property: minimum number of in-sync/synchronized replicas (including leader) that must acknowledge the message
                 .build();
     }
 
