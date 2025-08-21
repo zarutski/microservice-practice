@@ -17,6 +17,7 @@ import java.util.Map;
 @Configuration
 public class KafkaConfig {
 
+    // TODO: rewrite with Environment bean
     @Value("${spring.kafka.producer.bootstrap-servers}")
     private String bootstrapServers;
 
@@ -44,7 +45,7 @@ public class KafkaConfig {
     @Value("${spring.kafka.producer.properties.max.in.flight.requests.per.connection}")
     private String maxInFlightRequests;
 
-    Map<String, Object> producerConfigs() {
+    private Map<String, Object> producerConfigs() {
         Map<String, Object> config = new HashMap<>();
         config.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         config.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, keySerializer);
@@ -60,18 +61,18 @@ public class KafkaConfig {
 
     // more flexible java-config - properties only config replacement (dynamic config, easier testing)
     @Bean
-    ProducerFactory<String, ProductCreatedEvent> producerFactory() {
+    public ProducerFactory<String, ProductCreatedEvent> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate() {
+    public KafkaTemplate<String, ProductCreatedEvent> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 
     // describe bean to create new topic at the application startup
     @Bean
-    NewTopic createTopic() {
+    public NewTopic createTopic() {
         return TopicBuilder.name("product-created-events-topic")
                 .partitions(3)
                 .replicas(3) // each partition will be stored on 3 brokers (1 leader + 2 followers); max possible if the cluster has 3 brokers
