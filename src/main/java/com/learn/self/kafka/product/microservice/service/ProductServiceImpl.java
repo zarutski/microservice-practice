@@ -1,7 +1,8 @@
 package com.learn.self.kafka.product.microservice.service;
 
+import com.learn.self.kafka.product.core.ProductCreatedEvent;
 import com.learn.self.kafka.product.microservice.dto.CreateProductDTO;
-import com.learn.self.kafka.product.microservice.service.event.ProductCreatedEvent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.kafka.core.KafkaTemplate;
