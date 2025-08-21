@@ -5,13 +5,13 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.3</version>
+        <version>3.5.4</version>
         <relativePath/>
     </parent>
     <groupId>com.learn.self.kafka.product</groupId>
-    <artifactId>microservice</artifactId>
+    <artifactId>ProductMicroservice</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>microservice</name>
+    <name>ProductMicroservice</name>
 
     <properties>
         <java.version>17</java.version>
