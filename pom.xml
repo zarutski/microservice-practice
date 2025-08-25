@@ -20,8 +20,6 @@
         <microservices.core.version>0.0.1-SNAPSHOT</microservices.core.version>
     </properties>
 
-
-
     <dependencies>
         <dependency>
             <groupId>com.learn.self.kafka.product</groupId>
