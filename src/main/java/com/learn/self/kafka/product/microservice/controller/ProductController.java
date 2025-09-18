@@ -18,8 +18,9 @@ import java.util.Date;
 @RequestMapping("/product")
 public class ProductController {
 
-    private ProductService productService;
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+
+    private ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
@@ -27,7 +28,7 @@ public class ProductController {
 
     @PostMapping
     public ResponseEntity<Object> createProduct(@RequestBody CreateProductDTO createProductDTO) {
-        String productId = null;
+        String productId;
         try {
             productId = productService.createProduct(createProductDTO);
         } catch (Exception e) {
